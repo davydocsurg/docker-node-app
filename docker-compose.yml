@@ -9,8 +9,8 @@ services:
     restart: always
     environment:
       NODE_ENV: development
-      MONGO_URI: "mongodb://app-db:27017/docker-node-app"
-      JWT_SECRET: my-secret
+      MONGO_URI: mongodb://app-db:27017/docker-node-app
+      JWT_SECRET: my-secret # you can use any string
     ports:
       - '8080:8080'
     depends_on:
