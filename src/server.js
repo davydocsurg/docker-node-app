@@ -5,17 +5,20 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 8081;
+const port = process.env.PORT || 8080;
 
-mongoose.connect(
-    process.env.MONGODB_URI || "mongodb://localhost/docker-node-app",
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useCreateIndex: true,
-        useFindAndModify: false,
+const connectDB = async () => {
+    try {
+        await mongoose.connect(
+            process.env.MONGO_URI || "mongodb://localhost:27017/docker-node-app"
+        );
+        console.log("MongoDB connected");
+    } catch (error) {
+        console.error(error);
     }
-);
+};
+
+connectDB();
 
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
