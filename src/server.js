@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const router = require("./routes/auth");
 
 dotenv.config();
 
@@ -19,6 +20,9 @@ const connectDB = async () => {
 };
 
 connectDB();
+
+app.use(express.json());
+app.use("/api", router);
 
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);

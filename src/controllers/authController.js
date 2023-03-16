@@ -4,8 +4,8 @@ const jwt = require("jsonwebtoken");
 
 const register = async (req, res, next) => {
     try {
-        const { email, password } = req.body;
-        const user = await User.create({ email, password });
+        const { name, email, password } = req.body;
+        const user = await User.create({ name, email, password });
         res.status(201).json({
             success: true,
             message: "User registered successfully",
@@ -31,11 +31,17 @@ const login = async (req, res, next) => {
                 .status(401)
                 .json({ success: false, message: "Invalid email or password" });
         }
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+        const token = jwt.sign(
+            { userId: user._id },
+            process.env.JWT_SECRET || "secret"
+        );
         res.json({ success: true, token });
     } catch (error) {
         next(error);
     }
 };
 
-export { register, login };
+module.exports = {
+    register,
+    login,
+};
