@@ -8,8 +8,8 @@ services:
       dockerfile: Dockerfile
     restart: always
     environment:
-      NODE_ENV: production
-      MONGO_URI: mongodb://localhost:27017/docker-node-app
+      NODE_ENV: development
+      MONGO_URI: "mongodb://app-db:27017/docker-node-app"
       JWT_SECRET: my-secret
     ports:
       - '8080:8080'
