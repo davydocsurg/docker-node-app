@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  app:
+    image: docker-node-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      NODE_ENV: production
+      MONGO_URI: mongodb://localhost:27017/docker-node-app
+      JWT_SECRET: my-secret
+    ports:
+      - '8080:8080'
+    depends_on:
+      - app-db
+
+  app-db:
+    image: mongo:5.0
+    restart: always
+    ports:
+      - '27017:27017'
+    volumes:
+      - app-db-data:/data/db
+
+volumes:
+  app-db-data:
