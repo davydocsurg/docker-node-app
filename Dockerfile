@@ -1,6 +1,7 @@
 # Build stage
 FROM node:18-alpine as build
 
+# set working directory
 WORKDIR /app
 
 # copy package.json and package-lock.json
